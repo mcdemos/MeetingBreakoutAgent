@@ -1,0 +1,22 @@
+﻿using Microsoft.Agents.Builder;
+using Microsoft.Agents.Core.Models;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+namespace MeetingBreakout.WebApp
+{
+    public class BreakoutAgent : ActivityHandler
+    {
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var member in membersAdded)
+            {
+                if (member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    // Logic to check participant role and send card will go here
+                }
+            }
+        }
+    }
+}

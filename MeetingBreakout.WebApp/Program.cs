@@ -1,0 +1,30 @@
+using MeetingBreakout.WebApp;
+using MeetingBreakout.WebApp.Services; // Add namespace
+using Microsoft.Agents.Hosting.AspNetCore;
+using Microsoft.Agents.Builder;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddHttpClient();
+
+// Register Services
+builder.Services.AddSingleton<SharePointService>();
+builder.Services.AddSingleton<RoomService>();
+
+// Register Cloud Adapter
+builder.Services.AddCloudAdapter();
+
+// Register the agent
+builder.Services.AddTransient<IAgent, BreakoutAgent>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

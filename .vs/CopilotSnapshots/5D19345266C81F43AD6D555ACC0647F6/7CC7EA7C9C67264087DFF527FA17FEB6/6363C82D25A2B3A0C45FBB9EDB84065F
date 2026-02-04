@@ -1,0 +1,71 @@
+﻿using Microsoft.Agents.Builder;
+using Microsoft.Agents.Builder.Compat;
+using Microsoft.Agents.Extensions.Teams;
+using Microsoft.Agents.Extensions.Teams.Compat;
+using Microsoft.Agents.Core.Models;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace MeetingBreakout.WebApp
+{
+    public class BreakoutAgent : TeamsActivityHandler
+    {
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var member in membersAdded)
+            {
+                if (member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    try
+                    {
+                        // Attempt to fetch meeting participant details to verify role
+                        // This assumes the conversation is a meeting.
+                        var participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, 
+                            meetingId: turnContext.Activity.Conversation.Id, 
+                            participantId: member.Id, 
+                            cancellationToken: cancellationToken);
+                        
+                        // Check if role is NOT Organizer
+                        if (participant != null && participant.Meeting.Role != "Organizer")
+                        {
+                            await SendOptionsCardAsync(turnContext, cancellationToken);
+                        }
+                    }
+                    catch
+                    {
+                        // Likely not a meeting or validation failed. Ignore.
+                    }
+                }
+            }
+        }
+
+        private async Task SendOptionsCardAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var cardData = new
+            {
+                type = "AdaptiveCard",
+                version = "1.4",
+                body = new object[]
+                {
+                    new { type = "TextBlock", text = "Please choose an option", size = "Medium", weight = "Bolder" }
+                },
+                actions = new object[]
+                {
+                    new { type = "Action.Submit", title = "Option 1", data = new { option = "1" } },
+                    new { type = "Action.Submit", title = "Option 2", data = new { option = "2" } },
+                    new { type = "Action.Submit", title = "Option 3", data = new { option = "3" } }
+                }
+            };
+
+            var reply = MessageFactory.Text("");
+            reply.Attachments.Add(new Attachment
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = cardData
+            });
+
+            await turnContext.SendActivityAsync(reply, cancellationToken);
+        }
+    }
+}
