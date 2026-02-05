@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -88,9 +88,17 @@ namespace MeetingBreakout.WebApp {
       }
     }
 
-    private static async Task NotifyParticipantAsync(ITurnContext turnContext, TeamsChannelAccount member, string roomLink, CancellationToken cancellationToken) {
+    private async Task NotifyParticipantAsync(ITurnContext turnContext, TeamsChannelAccount member, string roomLink, CancellationToken cancellationToken) {
       try {
         var msg = $"You have been assigned to a Breakout Room. Please click the link to join: {roomLink}";
+
+        var conversationParameters = new ConversationParameters {
+            IsGroup = false,
+            Agent = turnContext.Activity.Recipient,
+            Members = [member],
+            TenantId = turnContext.Activity.Conversation.TenantId
+        };
+        
         var channelId = turnContext.Activity.ChannelId;
         var serviceUrl = turnContext.Activity.ServiceUrl;
         var agentId = turnContext.Activity.Recipient?.Id;
@@ -99,9 +107,14 @@ namespace MeetingBreakout.WebApp {
             return;
         }
 
-        var conversationParameters = new ConversationParameters { IsGroup = false, Agent = turnContext.Activity.Recipient, Members = [member], TenantId = turnContext.Activity.Conversation.TenantId };
-
-        await ((IChannelAdapter)turnContext.Adapter).CreateConversationAsync(agentId!, channelId!, serviceUrl!, string.Empty, conversationParameters, async (t, c) => { await t.SendActivityAsync(MessageFactory.Text(msg), c); }, cancellationToken);
+        await ((IChannelAdapter)turnContext.Adapter).CreateConversationAsync(
+            agentId!, 
+            channelId!, 
+            serviceUrl!, 
+            string.Empty, 
+            conversationParameters, 
+            async (t, c) => { await t.SendActivityAsync(MessageFactory.Text(msg), c); }, 
+            cancellationToken);
       } catch (Exception ex) {
          Console.WriteLine($"Participant notification failed: {ex.Message}");
       }

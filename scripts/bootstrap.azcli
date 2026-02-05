@@ -1,12 +1,28 @@
 #!/bin/bash
 
-# Configuration Variables
-RESOURCE_GROUP="MeetingBreakout-RG"
-LOCATION="eastus"
-RANDOM_ID=$RANDOM
-APP_NAME="meeting-breakout-$RANDOM_ID"
-SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+,
+  "AzureAd": {
+    "TenantId": "024f042a-6273-49d4-ada7-090f6d1ce423",
+    "ClientId": "6e4adcec-2bbf-449f-82e8-a97a03ae8ecf",
+    "ClientSecret": "htg8Q~PL7zKGoT5RdgojWQkZWaxVXvbQ2fLwKc3Q"
+  },
+  "SharePoint": {
+    "SiteId": "7c7d1881-d6b6-45e3-94d9-bbd5e109bb02",
+    "ListId": "8c5c275b-0c43-414c-aa16-895f08e53593"
+  },
+  "Storage": {
+    "ConnectionString": "UseDevelopmentStorage=true"
+  }
 
+
+# Configuration Variables
+RESOURCE_GROUP="mcmbrg"
+LOCATION="northeurope"
+RANDOM_ID=$RANDOM
+APP_NAME="mcmb"
+# SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+SUBSCRIPTION_ID="aae817a8-8a81-4a7d-9f26-664cd1ca3d64"
+TENANT_ID="024f042a-6273-49d4-ada7-090f6d1ce423",
 echo "Bootstrapping Solution: $APP_NAME in $RESOURCE_GROUP ($LOCATION)"
 
 # 1. Create Resource Group
@@ -16,59 +32,50 @@ az group create --name $RESOURCE_GROUP --location $LOCATION
 # 2. Create Microsoft Entra ID Application (App Registration)
 # This is needed for the Bot Framework authentication
 echo "Creating Entra ID Application..."
-AD_APP=$(az ad app create --display-name "$APP_NAME-identity" --sign-in-audience AzureADMultipleOrgs --web-redirect-uris "https://$APP_NAME-web.azurewebsites.net/api/messages" --output json)
-APP_ID=$(echo $AD_APP | jq -r .appId)
-OBJECT_ID=$(echo $AD_APP | jq -r .id)
+# AD_APP=$(az ad app create --display-name "$APP_NAME-identity" --sign-in-audience AzureADMultipleOrgs --web-redirect-uris "https://$APP_NAME-web.azurewebsites.net/api/messages" --output json)
+#APP_ID=$(echo $AD_APP | jq -r .appId)
+APP_ID="6e4adcec-2bbf-449f-82e8-a97a03ae8ecf"
+# OBJECT_ID=$(echo $AD_APP | jq -r .id)
 
 echo "App ID: $APP_ID"
 
 # Reset Credentials to get a Client Secret
 echo "Generating Client Secret..."
-SECRET_JSON=$(az ad app credential reset --id $APP_ID --display-name "DeploymentSecret" --years 2 --output json)
+# SECRET_JSON=$(az ad app credential reset --id $APP_ID --display-name "DeploymentSecret" --years 2 --output json)
 CLIENT_SECRET=$(echo $SECRET_JSON | jq -r .password)
+CLIENT_SECRET="htg8Q~PL7zKGoT5RdgojWQkZWaxVXvbQ2fLwKc3Q"
 
 # 3. Deploy Azure Resources via Bicep
 echo "Deploying Infrastructure..."
-az deployment group create \
-  --resource-group $RESOURCE_GROUP \
-  --template-file ../Infrastructure/main.bicep \
-  --parameters appName=$APP_NAME location=$LOCATION
+az deployment group create --resource-group $RESOURCE_GROUP --template-file ../Infrastructure/main.bicep --parameters appName=${APP_NAME}wa location=$LOCATION
 
 # 4. Create Azure Bot Service (Bot Channels Registration)
 # This resource links the App ID to the Messaging Endpoint
 echo "Creating Azure Bot Service..."
-az bot create \
-  --resource-group $RESOURCE_GROUP \
-  --name "$APP_NAME-bot" \
-  --kind webapp \
-  --location global \
-  --appid $APP_ID \
-  --password $CLIENT_SECRET \
-  --endpoint "https://$APP_NAME-web.azurewebsites.net/api/messages" \
-  --sku F0
+az bot create --resource-group $RESOURCE_GROUP --name "${APP_NAME}b" --kind webapp --location global --appid $APP_ID --password $CLIENT_SECRET --endpoint "https://${APP_NAME}wa.azurewebsites.net/api/messages" --sku F0
 
 # Enables the Microsoft Teams Channel
 echo "Enabling Teams Channel..."
-az bot msteams create --resource-group $RESOURCE_GROUP --name "$APP_NAME-bot"
+az bot msteams create --resource-group $RESOURCE_GROUP --name "${APP_NAME}b"
 
 # 5. Configure Web App Settings
 echo "Configuring Web App Settings..."
-az webapp config appsettings set --name "$APP_NAME-web" --resource-group $RESOURCE_GROUP --settings \
-    AzureAd:TenantId=$(az account show --query tenantId -o tsv) \
+az webapp config appsettings set --name "${APP_NAME}wa" --resource-group $RESOURCE_GROUP --settings \
+    AzureAd:TenantId=$TENANT_ID \
     AzureAd:ClientId=$APP_ID \
     AzureAd:ClientSecret=$CLIENT_SECRET \
-    MicrosoftAppType="MultiTenant" \
+    MicrosoftAppType="SingleTenant" \
     MicrosoftAppId=$APP_ID \
     MicrosoftAppPassword=$CLIENT_SECRET \
-    SharePoint:SiteId="TODO_REPLACE_WITH_SITE_ID" \
-    SharePoint:ListId="TODO_REPLACE_WITH_LIST_ID"
+    SharePoint:SiteId="7c7d1881-d6b6-45e3-94d9-bbd5e109bb02" \
+    SharePoint:ListId="8c5c275b-0c43-414c-aa16-895f08e53593"
 
 # 6. Build and Deploy Web App (Bot)
 echo "Building and Deploying Web App..."
 dotnet publish ../MeetingBreakout.WebApp/MeetingBreakout.WebApp.csproj -c Release -o ../publish/web
 cd ../publish/web
 zip -r ../web.zip .
-az webapp deployment source config-zip --resource-group $RESOURCE_GROUP --name "$APP_NAME-web" --src ../web.zip
+az webapp deployment source config-zip --resource-group $RESOURCE_GROUP --name "${APP_NAME}wa" --src ../web.zip
 cd ../../Scripts
 
 # 7. Build and Deploy Function App
@@ -83,7 +90,7 @@ zip -r ../func.zip .
 # config-zip command handles the upload to a compliant path for many SKUs.
 # For strict Flex Consumption compliance, we ensure the 'deployment' property in JSON is respected
 # or use `az functionapp deploy` (preview) or config-zip.
-az functionapp deployment source config-zip --resource-group $RESOURCE_GROUP --name "$APP_NAME-func" --src ../func.zip
+az functionapp deployment source config-zip --resource-group $RESOURCE_GROUP --name "${APP_NAME}fa" --src ../func.zip
 cd ../../Scripts
 
 echo "Bootstrap Complete."

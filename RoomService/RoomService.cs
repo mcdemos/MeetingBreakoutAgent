@@ -143,19 +143,19 @@ public class RoomService: IRoomService {
 
     string[] options = ["1", "2", "3"];
     foreach (var option in options) {
-        for (int i = 1; i <= 10; i++) {
-             var room = new RoomEntity {
-                PartitionKey = option,
-                RowKey = $"Room_{option}_{i}",
-                Status = "Free",
-                MeetingLink = $"https://teams.microsoft.com/l/meetup-join/mock_link_{option}_{i}",
-                IsOrganizerPresent = false,
-                IsParticipantPresent = false,
-                AssignedParticipantId = null,
-                AssignedParticipantName = null
-            };
-            await _tableClient.UpsertEntityAsync(room, TableUpdateMode.Replace);
-        }
+      for (int i = 1; i <= 10; i++) {
+        var room = new RoomEntity {
+          PartitionKey = option,
+          RowKey = $"Room_{option}_{i}",
+          Status = "Free",
+          MeetingLink = $"https://teams.microsoft.com/l/meetup-join/mock_link_{option}_{i}",
+          IsOrganizerPresent = false,
+          IsParticipantPresent = false,
+          AssignedParticipantId = null,
+          AssignedParticipantName = null
+        };
+        await _tableClient.UpsertEntityAsync(room, TableUpdateMode.Replace);
+      }
     }
   }
 }

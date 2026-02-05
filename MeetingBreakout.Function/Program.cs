@@ -12,7 +12,7 @@ builder.ConfigureFunctionsWebApplication();
 builder.Services.AddSingleton<IRoomService, RoomService.RoomService>();
 
 builder.Services
-    .AddApplicationInsightsTelemetryWorkerService()
-    .ConfigureFunctionsApplicationInsights();
+  .AddApplicationInsightsTelemetryWorkerService()
+  .ConfigureFunctionsApplicationInsights();
 
 builder.Build().Run();
