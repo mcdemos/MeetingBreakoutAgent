@@ -1,7 +1,11 @@
-using MeetingBreakout.WebApp;
-using MeetingBreakout.WebApp.Services; // Add namespace
 using Microsoft.Agents.Hosting.AspNetCore;
 using Microsoft.Agents.Builder;
+using Microsoft.Agents.Authentication;
+using Microsoft.Agents.Connector;
+
+using MeetingBreakout.WebApp;
+using MeetingBreakout.WebApp.Services;
+using RoomService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +14,13 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 
 // Register Services
-builder.Services.AddSingleton<SharePointService>();
-builder.Services.AddSingleton<RoomService>();
+builder.Services.AddSingleton<ISharePointService, SharePointService>();
+builder.Services.AddSingleton<IRoomService, RoomService.RoomService>();
+builder.Services.AddSingleton<ITeamsService, TeamsService>();
 
 // Register Cloud Adapter
+builder.Services.AddSingleton<IConnections, ConfigurationConnections>();
+builder.Services.AddSingleton<IChannelServiceClientFactory, RestChannelServiceClientFactory>();
 builder.Services.AddCloudAdapter();
 
 // Register the agent

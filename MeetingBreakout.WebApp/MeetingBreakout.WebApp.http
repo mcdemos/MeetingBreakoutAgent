@@ -1,6 +1,0 @@
-@MeetingBreakout.WebApp_HostAddress = http://localhost:5283
-
-GET {{MeetingBreakout.WebApp_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

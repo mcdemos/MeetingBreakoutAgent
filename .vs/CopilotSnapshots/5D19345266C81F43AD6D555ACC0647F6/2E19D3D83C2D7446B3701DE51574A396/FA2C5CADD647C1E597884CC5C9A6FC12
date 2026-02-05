@@ -1,0 +1,6 @@
+﻿namespace RoomService;
+
+public class RoomService
+{
+
+}

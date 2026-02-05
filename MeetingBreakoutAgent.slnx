@@ -1,4 +1,7 @@
 <Solution>
   <Project Path="MeetingBreakout.WebApp/MeetingBreakout.WebApp.csproj" />
-
+  <Project Path="MeetingBreakout.Function/MeetingBreakout.Function.csproj" />
+  <Project Path="RoomService/RoomService.csproj" />
+  <Project Path="MeetingBreakout.WebApp.Tests/MeetingBreakout.WebApp.Tests.csproj" />
+  <Project Path="RoomService.Tests/RoomService.Tests.csproj" />
 </Solution>

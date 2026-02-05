@@ -1,54 +1,52 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Azure.Identity;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Graph.Models;
 
-namespace MeetingBreakout.WebApp.Services
-{
-    public class SharePointService
-    {
-        private readonly GraphServiceClient _graphClient;
-        private readonly string _siteId;
-        private readonly string _listId;
+using Azure.Identity;
 
-        public SharePointService(IConfiguration configuration)
-        {
-            var tenantId = configuration["AzureAd:TenantId"];
-            var clientId = configuration["AzureAd:ClientId"];
-            var clientSecret = configuration["AzureAd:ClientSecret"];
-            
-            _siteId = configuration["SharePoint:SiteId"];
-            _listId = configuration["SharePoint:ListId"];
+namespace MeetingBreakout.WebApp.Services {
+  public class SharePointService: ISharePointService {
+    private readonly GraphServiceClient? _graphClient;
+    private readonly string? _siteId;
+    private readonly string? _listId;
 
-            var options = new ClientSecretCredentialOptions
-            {
-                AuthorityHost = AzureAuthorityHosts.AzurePublicCloud,
-            };
+    public SharePointService(IConfiguration configuration) {
+      var tenantId = configuration["AzureAd:TenantId"];
+      var clientId = configuration["AzureAd:ClientId"];
+      var clientSecret = configuration["AzureAd:ClientSecret"];
 
-            var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret, options);
-            _graphClient = new GraphServiceClient(clientSecretCredential);
-        }
+      _siteId = configuration["SharePoint:SiteId"];
+      _listId = configuration["SharePoint:ListId"];
 
-        public async Task AddBreakoutSelectionAsync(string name, string alias, string option, DateTimeOffset timestamp)
-        {
-            var listItem = new ListItem
-            {
-                Fields = new FieldValueSet
-                {
-                    AdditionalData = new Dictionary<string, object>
-                    {
-                        { "Title", name },
-                        { "Alias", alias },
-                        { "OptionSelected", option },
-                        { "SelectionTimestamp", timestamp }
-                    }
-                }
-            };
+      if (!string.IsNullOrEmpty(tenantId) && !string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret)) {
+        var options = new ClientSecretCredentialOptions {
+          AuthorityHost = AzureAuthorityHosts.AzurePublicCloud,
+        };
 
-            await _graphClient.Sites[_siteId].Lists[_listId].Items.PostAsync(listItem);
-        }
+        var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret, options);
+        _graphClient = new GraphServiceClient(clientSecretCredential);
+      }
     }
+
+    public async Task AddBreakoutSelectionAsync(string name, string alias, string option, DateTimeOffset timestamp) {
+      if (_graphClient == null || string.IsNullOrEmpty(_siteId) || string.IsNullOrEmpty(_listId)) return;
+
+      var listItem = new ListItem {
+        Fields = new FieldValueSet {
+          AdditionalData = new Dictionary<string, object> {
+            { "Title", name },
+            { "Alias", alias },
+            { "OptionSelected", option },
+            { "SelectionTimestamp", timestamp }
+          }
+        }
+      };
+
+      await _graphClient.Sites[_siteId].Lists[_listId].Items.PostAsync(listItem);
+    }
+  }
 }

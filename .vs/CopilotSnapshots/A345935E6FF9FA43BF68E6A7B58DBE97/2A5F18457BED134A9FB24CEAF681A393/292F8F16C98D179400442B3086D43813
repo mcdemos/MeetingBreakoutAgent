@@ -1,0 +1,36 @@
+﻿using Microsoft.Agents.Hosting.AspNetCore;
+using Microsoft.Agents.Builder;
+using Microsoft.Agents.Authentication;
+using Microsoft.Agents.Connector;
+
+using MeetingBreakout.WebApp;
+using MeetingBreakout.WebApp.Services;
+using RoomService;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddHttpClient();
+
+// Register Services
+builder.Services.AddSingleton<ISharePointService, SharePointService>();
+builder.Services.AddSingleton<IRoomService, RoomService.RoomService>();
+builder.Services.AddSingleton<ITeamsService, TeamsService>();
+
+// Register Cloud Adapter
+builder.Services.AddSingleton<IChannelServiceClientFactory, RestChannelServiceClientFactory>();
+builder.Services.AddCloudAdapter();
+
+// Register the agent
+builder.Services.AddTransient<IAgent, BreakoutAgent>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

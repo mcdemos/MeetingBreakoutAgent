@@ -1,0 +1,213 @@
+﻿using Microsoft.Agents.Builder;
+using Microsoft.Agents.Builder.Compat;
+using Microsoft.Agents.Extensions.Teams.Compat; // TeamsActivityHandler
+using Microsoft.Agents.Extensions.Teams.Connector; // TeamsInfo
+using Microsoft.Agents.Core.Models;
+using Microsoft.Agents.Extensions.Teams.Models; // MeetingParticipantsEventDetails
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using MeetingBreakout.WebApp.Services;
+using System;
+using System.Linq;
+using Newtonsoft.Json.Linq; // For parsing activity value
+
+namespace MeetingBreakout.WebApp
+{
+    public class BreakoutAgent : TeamsActivityHandler
+    {
+        private readonly SharePointService _sharePointService;
+        private readonly RoomService _roomService;
+
+        public BreakoutAgent(SharePointService sharePointService, RoomService roomService)
+        {
+            _sharePointService = sharePointService;
+            _roomService = roomService;
+        }
+
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var member in membersAdded)
+            {
+                if (member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    try
+                    {
+                        var participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, 
+                            meetingId: turnContext.Activity.Conversation.Id, 
+                            participantId: member.Id, 
+                            cancellationToken: cancellationToken);
+                        
+                        if (participant != null && participant.Meeting.Role != "Organizer")
+                        {
+                            await SendOptionsCardAsync(turnContext, cancellationToken);
+                        }
+                    }
+                    catch
+                    {
+                        // Fallback or ignore
+                    }
+                }
+            }
+        }
+
+        protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            if (turnContext.Activity.Value != null)
+            {
+                var value = JObject.FromObject(turnContext.Activity.Value);
+                if (value["option"] != null)
+                {
+                    string option = value["option"]!.ToString();
+                    var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
+                    string name = member?.Name ?? "Unknown";
+                    string alias = member?.UserPrincipalName ?? "Unknown"; // Approximating alias with UPN, better matches usually available in AAD
+
+                    await _sharePointService.AddBreakoutSelectionAsync(name, alias, option, DateTimeOffset.Now);
+                    
+                    if (member == null)
+                    {
+                         await turnContext.SendActivityAsync(MessageFactory.Text("Could not retrieve member details."), cancellationToken);
+                         return;
+                    }
+
+                    // Room Assignment
+                    await _roomService.EnsureTableExistsAsync();
+                    var room = await _roomService.GetFreeRoomAsync(option);
+                    
+                    if (room != null)
+                    {
+                        await _roomService.AssignRoomAsync(room, member.Id, name);
+                        var link = room.MeetingLink ?? "N/A";
+                        await turnContext.SendActivityAsync(MessageFactory.Text($"Room assigned: {link}"), cancellationToken);
+                        
+                        // Notify Organizers
+                        await NotifyOrganizersAsync(turnContext, name, link, cancellationToken);
+                    }
+                    else
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Text("No free rooms available for this option."), cancellationToken);
+                    }
+
+                    return;
+                }
+            }
+
+            await base.OnMessageActivityAsync(turnContext, cancellationToken);
+        }
+
+        protected override async Task OnTeamsMeetingParticipantsJoinAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var member in meeting.Members)
+            {
+                await _roomService.UpdatePresenceAsync(turnContext.Activity.Conversation.Id, member.User.Id, isJoining: true);
+            }
+        }
+
+        protected override async Task OnTeamsMeetingParticipantsLeaveAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var member in meeting.Members)
+            {
+                // Note: On Leave, member.User might be partial, but ID is usually there.
+                await _roomService.UpdatePresenceAsync(turnContext.Activity.Conversation.Id, member.User.Id, isJoining: false);
+            }
+        }
+
+        private async Task NotifyOrganizersAsync(ITurnContext turnContext, string assignedUser, string roomLink, CancellationToken cancellationToken)
+        {
+            try
+            {
+                // Get all members of the current context (Main Meeting)
+                // Note: This might be large.
+                var members = await TeamsInfo.GetPagedMembersAsync(turnContext, pageSize: 50, cancellationToken: cancellationToken);
+                
+                foreach (var member in members.Members)
+                {
+                    try
+                    {
+                        // Check if Organizer
+                        var participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, 
+                            participantId: member.Id, 
+                            cancellationToken: cancellationToken);
+
+                        if (participant != null && participant.Meeting.Role == "Organizer")
+                        {
+                            var msg = $"User {assignedUser} assigned to Breakout Room: {roomLink}";
+                            
+                            // Send 1:1
+                            var conversationParameters = new ConversationParameters
+                            {
+                                IsGroup = false,
+                                Agent = turnContext.Activity.Recipient, // Changed Bot to Agent
+                                Members = new List<ChannelAccount> { member },
+                                TenantId = turnContext.Activity.Conversation.TenantId
+                            };
+
+                            // Create Conversation
+                            var channelId = turnContext.Activity.ChannelId;
+                            if (string.IsNullOrEmpty(channelId))
+                            {
+                                continue;
+                            }
+
+                            var agentId = turnContext.Activity.Recipient?.Id;
+                            if (string.IsNullOrEmpty(agentId))
+                            {
+                                continue;
+                            }
+
+                            await ((IChannelAdapter)turnContext.Adapter).CreateConversationAsync(
+                                agentId, // AgentAppId
+                                channelId,
+                                turnContext.Activity.ServiceUrl,
+                                string.Empty, // Audience
+                                conversationParameters,
+                                async (t, c) =>
+                                {
+                                    await t.SendActivityAsync(MessageFactory.Text(msg), c);
+                                },
+                                cancellationToken);
+                        }
+                    }
+                    catch
+                    {
+                        // Ignore permission errors or if member left
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log notification failure
+                Console.WriteLine($"Notification failed: {ex.Message}");
+            }
+        }
+
+        private async Task SendOptionsCardAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var cardData = new
+            {
+                type = "AdaptiveCard",
+                version = "1.4",
+                body = new object[]
+                {
+                    new { type = "TextBlock", text = "Welcome! Please choose a breakout room option:", size = "Medium", weight = "Bolder" }
+                },
+                actions = new object[]
+                {
+                    new { type = "Action.Submit", title = "Option 1", data = new { option = "1" } },
+                    new { type = "Action.Submit", title = "Option 2", data = new { option = "2" } },
+                    new { type = "Action.Submit", title = "Option 3", data = new { option = "3" } }
+                }
+            };
+
+            var reply = MessageFactory.Text("");
+            reply.Attachments.Add(new Attachment
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = cardData
+            });
+
+            await turnContext.SendActivityAsync(reply, cancellationToken);
+        }
+    }
+}

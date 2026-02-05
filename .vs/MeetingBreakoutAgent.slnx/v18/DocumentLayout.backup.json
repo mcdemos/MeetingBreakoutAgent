@@ -1,0 +1,199 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\MeetingBreakoutAgent\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\VisualStudio\\copilot-vs\\plan-5e9345a3-f96f-43fa-bf68-e6a7b58dbe97.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.webapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|solutionrelative:meetingbreakout.webapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.webapp\\services\\sharepointservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|solutionrelative:meetingbreakout.webapp\\services\\sharepointservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.webapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|solutionrelative:meetingbreakout.webapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.webapp\\services\\teamsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{612193FE-C230-60CF-8CEA-CA20CF9DAC4C}|MeetingBreakout.WebApp\\MeetingBreakout.WebApp.csproj|solutionrelative:meetingbreakout.webapp\\services\\teamsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96C5CEA-F0FF-905D-C69A-7F2558A3511D}|RoomService\\RoomService.csproj|c:\\projects\\meetingbreakoutagent\\roomservice\\iroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96C5CEA-F0FF-905D-C69A-7F2558A3511D}|RoomService\\RoomService.csproj|solutionrelative:roomservice\\iroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96C5CEA-F0FF-905D-C69A-7F2558A3511D}|RoomService\\RoomService.csproj|c:\\projects\\meetingbreakoutagent\\roomservice\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96C5CEA-F0FF-905D-C69A-7F2558A3511D}|RoomService\\RoomService.csproj|solutionrelative:roomservice\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Projects\\MeetingBreakoutAgent\\Infrastructure\\main.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\main.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Projects\\MeetingBreakoutAgent\\scripts\\bootstrap.azcli||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:scripts\\bootstrap.azcli||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{304FDCD0-4027-7448-5C17-25746790BB9F}|MeetingBreakout.Function\\MeetingBreakout.Function.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.function\\cleanup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304FDCD0-4027-7448-5C17-25746790BB9F}|MeetingBreakout.Function\\MeetingBreakout.Function.csproj|solutionrelative:meetingbreakout.function\\cleanup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{304FDCD0-4027-7448-5C17-25746790BB9F}|MeetingBreakout.Function\\MeetingBreakout.Function.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.function\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304FDCD0-4027-7448-5C17-25746790BB9F}|MeetingBreakout.Function\\MeetingBreakout.Function.csproj|solutionrelative:meetingbreakout.function\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "bootstrap.azcli",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\scripts\\bootstrap.azcli",
+              "RelativeDocumentMoniker": "scripts\\bootstrap.azcli",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\scripts\\bootstrap.azcli",
+              "RelativeToolTip": "scripts\\bootstrap.azcli",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-05T00:10:36.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "main.bicep",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\Infrastructure\\main.bicep",
+              "RelativeDocumentMoniker": "Infrastructure\\main.bicep",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\Infrastructure\\main.bicep",
+              "RelativeToolTip": "Infrastructure\\main.bicep",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-05T00:05:14.884Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Cleanup.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.Function\\Cleanup.cs",
+              "RelativeDocumentMoniker": "MeetingBreakout.Function\\Cleanup.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.Function\\Cleanup.cs",
+              "RelativeToolTip": "MeetingBreakout.Function\\Cleanup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T00:01:44.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.Function\\Program.cs",
+              "RelativeDocumentMoniker": "MeetingBreakout.Function\\Program.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.Function\\Program.cs",
+              "RelativeToolTip": "MeetingBreakout.Function\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T00:01:19.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RoomService.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\RoomService.cs",
+              "RelativeDocumentMoniker": "RoomService\\RoomService.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\RoomService.cs",
+              "RelativeToolTip": "RoomService\\RoomService.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T00:00:44.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IRoomService.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\IRoomService.cs",
+              "RelativeDocumentMoniker": "RoomService\\IRoomService.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\IRoomService.cs",
+              "RelativeToolTip": "RoomService\\IRoomService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAIBWwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T00:00:24.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "plan-5e9345a3-f96f-43fa-bf68-e6a7b58dbe97.md [Preview]",
+              "DocumentMoniker": "C:\\Temp\\VisualStudio\\copilot-vs\\plan-5e9345a3-f96f-43fa-bf68-e6a7b58dbe97.md",
+              "RelativeDocumentMoniker": "..\\..\\Temp\\VisualStudio\\copilot-vs\\plan-5e9345a3-f96f-43fa-bf68-e6a7b58dbe97.md",
+              "ToolTip": "C:\\Temp\\VisualStudio\\copilot-vs\\plan-5e9345a3-f96f-43fa-bf68-e6a7b58dbe97.md [Preview]",
+              "RelativeToolTip": "..\\..\\Temp\\VisualStudio\\copilot-vs\\plan-5e9345a3-f96f-43fa-bf68-e6a7b58dbe97.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-02-04T23:59:00.116Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "MeetingBreakout.WebApp\\appsettings.Development.json",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\appsettings.Development.json",
+              "RelativeToolTip": "MeetingBreakout.WebApp\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-04T23:11:01.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SharePointService.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\Services\\SharePointService.cs",
+              "RelativeDocumentMoniker": "MeetingBreakout.WebApp\\Services\\SharePointService.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\Services\\SharePointService.cs",
+              "RelativeToolTip": "MeetingBreakout.WebApp\\Services\\SharePointService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwCcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T22:45:34.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\Program.cs",
+              "RelativeDocumentMoniker": "MeetingBreakout.WebApp\\Program.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\Program.cs",
+              "RelativeToolTip": "MeetingBreakout.WebApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T22:43:40.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TeamsService.cs",
+              "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\Services\\TeamsService.cs",
+              "RelativeDocumentMoniker": "MeetingBreakout.WebApp\\Services\\TeamsService.cs",
+              "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.WebApp\\Services\\TeamsService.cs",
+              "RelativeToolTip": "MeetingBreakout.WebApp\\Services\\TeamsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAB3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T22:14:16.442Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

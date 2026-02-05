@@ -1,0 +1,19 @@
+{
+    "name": "MeetingBreakout",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "name": "MeetingBreakout",
+            "id": "584cc790-021d-11f1-a11b-eb92cb9a5101",
+            "appId": "6e4adcec-2bbf-449f-82e8-a97a03ae8ecf",
+            "appPassword": "htg8Q~PL7zKGoT5RdgojWQkZWaxVXvbQ2fLwKc3Q",
+            "tenantId": "",
+            "endpoint": "http://localhost:5283/api/messages"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "path": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.bot",
+    "overrides": null
+}

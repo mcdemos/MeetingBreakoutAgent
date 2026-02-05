@@ -1,0 +1,13 @@
+using System.Threading.Tasks;
+
+namespace RoomService;
+
+public interface IRoomService
+{
+    Task EnsureTableExistsAsync();
+    Task<RoomEntity?> GetFreeRoomAsync(string option);
+    Task AssignRoomAsync(RoomEntity room, string participantId, string participantName);
+    Task UpdatePresenceAsync(string meetingId, string userId, bool isJoining);
+    Task InitializeRoomsAsync();
+    Task<RoomEntity?> GetRoomByMeetingIdAsync(string meetingId);
+}
