@@ -46,11 +46,11 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MeetingBreakout.Function.Tests\\UnitTest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.Function.Tests\\CleanupTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MeetingBreakout.Function.Tests\\CleanupTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\CopilotBaseline\\Deleted\\1934962049\\UnitTest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\CopilotBaseline\\Deleted\\1934962049\\UnitTest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{558E076F-2A61-41F0-A5C3-E4EA7D126D32}|MeetingBreakout.Function.Tests\\MeetingBreakout.Function.Tests.csproj|c:\\projects\\meetingbreakoutagent\\meetingbreakout.function.tests\\cleanuptests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558E076F-2A61-41F0-A5C3-E4EA7D126D32}|MeetingBreakout.Function.Tests\\MeetingBreakout.Function.Tests.csproj|solutionrelative:meetingbreakout.function.tests\\cleanuptests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -68,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\Temp\\CopilotBaseline\\Deleted\\1934962049\\UnitTest1.cs",
               "RelativeDocumentMoniker": "..\\..\\Temp\\CopilotBaseline\\Deleted\\1934962049\\UnitTest1.cs",
@@ -76,12 +76,11 @@
               "RelativeToolTip": "..\\..\\Temp\\CopilotBaseline\\Deleted\\1934962049\\UnitTest1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T21:21:14.194Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T21:21:14.194Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "CleanupTests.cs",
               "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\MeetingBreakout.Function.Tests\\CleanupTests.cs",
               "RelativeDocumentMoniker": "MeetingBreakout.Function.Tests\\CleanupTests.cs",
@@ -89,8 +88,7 @@
               "RelativeToolTip": "MeetingBreakout.Function.Tests\\CleanupTests.cs",
               "ViewState": "AgIAABAAAAAAAAAAAABBwDkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T21:18:50.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T21:18:50.492Z"
             },
             {
               "$type": "Document",
@@ -102,8 +100,7 @@
               "RelativeToolTip": "MeetingBreakout.Function.Tests\\UnitTest1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T21:18:42.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T21:18:42.335Z"
             },
             {
               "$type": "Document",
@@ -127,8 +124,7 @@
               "RelativeToolTip": "AppPackage\\manifest.json",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-05T21:14:50.338Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T21:14:50.338Z"
             },
             {
               "$type": "Document",
@@ -140,8 +136,7 @@
               "RelativeToolTip": "MeetingBreakout.WebApp\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-05T02:12:03.082Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T02:12:03.082Z"
             },
             {
               "$type": "Document",
@@ -153,8 +148,7 @@
               "RelativeToolTip": "MeetingBreakout.WebApp\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-05T02:10:26.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T02:10:26.031Z"
             },
             {
               "$type": "Document",
@@ -166,8 +160,7 @@
               "RelativeToolTip": "MeetingBreakout.WebApp\\BreakoutAgent.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAAAkwK4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T00:56:36.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T00:56:36.969Z"
             },
             {
               "$type": "Document",

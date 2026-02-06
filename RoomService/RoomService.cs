@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Azure;
 using Azure.Data.Tables;
 using Azure.Identity;
@@ -24,30 +25,35 @@ public class RoomEntity: ITableEntity {
 }
 
 public class RoomService: IRoomService {
-  private readonly TableClient? _tableClient; // Nullable if config missing
+private readonly TableClient? _tableClient; // Nullable if config missing
+private readonly ILogger<RoomService> _logger;
 
-  public RoomService(TableClient tableClient) {
-    _tableClient = tableClient;
-  }
+public RoomService(TableClient tableClient, ILogger<RoomService> logger) {
+  _tableClient = tableClient;
+  _logger = logger;
+}
 
-  public RoomService(IConfiguration configuration) {
-    // Assuming connection string for simplicity, or use Managed Identity uri
-    var storageAccountName = configuration["Storage:AccountName"];
-    var tableName = configuration["Storage:TableName"] ?? "BreakoutRooms";
-    var accountUrl = $"https://{storageAccountName}.table.core.windows.net";
+public RoomService(IConfiguration configuration, ILogger<RoomService> logger) {
+  _logger = logger;
+  // Assuming connection string for simplicity, or use Managed Identity uri
+  var storageAccountName = configuration["Storage:AccountName"];
+  var tableName = configuration["Storage:TableName"] ?? "BreakoutRooms";
+  var accountUrl = $"https://{storageAccountName}.table.core.windows.net";
 
-    if (!string.IsNullOrEmpty(storageAccountName)) {
-      var credential = new DefaultAzureCredential();
-      _tableClient = new TableClient(new Uri(accountUrl), tableName, credential);
-    } else {
-      // Fallback for local dev if connection string provided
-      var connectionString = configuration["Storage:ConnectionString"];
-      if (!string.IsNullOrEmpty(connectionString)) {
-        _tableClient = new TableClient(connectionString, tableName);
-      }
-      // If neither, _tableClient remains null, warn/log in real app
+  if (!string.IsNullOrEmpty(storageAccountName)) {
+    var credential = new DefaultAzureCredential();
+    _tableClient = new TableClient(new Uri(accountUrl), tableName, credential);
+  } else {
+    // Fallback for local dev if connection string provided
+    var connectionString = configuration["Storage:ConnectionString"];
+    if (!string.IsNullOrEmpty(connectionString)) {
+      _tableClient = new TableClient(connectionString, tableName);
+    }
+    if (_tableClient == null) {
+      _logger.LogWarning("TableClient not initialized. Missing Storage configuration.");
     }
   }
+}
 
   public async Task EnsureTableExistsAsync() {
     if (_tableClient != null) {
@@ -82,6 +88,7 @@ public class RoomService: IRoomService {
     // Requirement: "status should be changed in the moment where the assignment is made"
 
     await _tableClient.UpdateEntityAsync(room, room.ETag, TableUpdateMode.Replace);
+    _logger.LogInformation("Assigned room {RoomName} to {ParticipantName} ({ParticipantId})", room.RowKey, participantName, participantId);
   }
 
   public async Task<RoomEntity?> GetRoomByMeetingIdAsync(string meetingId) {
@@ -139,23 +146,29 @@ public class RoomService: IRoomService {
 
   public async Task InitializeRoomsAsync() {
     if (_tableClient == null) return;
-    await EnsureTableExistsAsync();
+    try {
+        await EnsureTableExistsAsync();
 
-    string[] options = ["1", "2", "3"];
-    foreach (var option in options) {
-      for (int i = 1; i <= 10; i++) {
-        var room = new RoomEntity {
-          PartitionKey = option,
-          RowKey = $"Room_{option}_{i}",
-          Status = "Free",
-          MeetingLink = $"https://teams.microsoft.com/l/meetup-join/mock_link_{option}_{i}",
-          IsOrganizerPresent = false,
-          IsParticipantPresent = false,
-          AssignedParticipantId = null,
-          AssignedParticipantName = null
-        };
-        await _tableClient.UpsertEntityAsync(room, TableUpdateMode.Replace);
-      }
+        string[] options = ["1", "2", "3"];
+        foreach (var option in options) {
+          for (int i = 1; i <= 10; i++) {
+            var room = new RoomEntity {
+              PartitionKey = option,
+              RowKey = $"Room_{option}_{i}",
+              Status = "Free",
+              MeetingLink = $"https://teams.microsoft.com/l/meetup-join/mock_link_{option}_{i}",
+              IsOrganizerPresent = false,
+              IsParticipantPresent = false,
+              AssignedParticipantId = null,
+              AssignedParticipantName = null
+            };
+            await _tableClient.UpsertEntityAsync(room, TableUpdateMode.Replace);
+          }
+        }
+        _logger.LogInformation("Rooms initialized successfully.");
+    } catch (Exception ex) {
+        _logger.LogError(ex, "Error initializing rooms.");
+        throw;
     }
   }
 }

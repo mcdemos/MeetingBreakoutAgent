@@ -1,0 +1,23 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "AzureAd": {
+    "TenantId": "024f042a-6273-49d4-ada7-090f6d1ce423",
+    "ClientId": "6e4adcec-2bbf-449f-82e8-a97a03ae8ecf",
+    "ClientSecret": "htg8Q~PL7zKGoT5RdgojWQkZWaxVXvbQ2fLwKc3Q"
+  },
+  "SharePoint": {
+    "SiteId": "7c7d1881-d6b6-45e3-94d9-bbd5e109bb02",
+    "ListId": "8c5c275b-0c43-414c-aa16-895f08e53593"
+  },
+  "Storage": {
+    "ConnectionString": "",
+    "AccountName": "mcmbsa",
+    "TableName": "BreakoutSessions"
+  }
+}

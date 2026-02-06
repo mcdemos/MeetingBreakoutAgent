@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Azure;
@@ -34,7 +35,8 @@ namespace RoomService.Tests {
         .Setup(c => c.QueryAsync<RoomEntity>(It.Is<string>(f => f.Contains("Status eq 'Free'")), It.IsAny<int?>(), It.IsAny<IEnumerable<string>>(), It.IsAny<CancellationToken>()))
         .Returns(asyncPageable);
 
-      var service = new RoomService(mockTableClient.Object);
+      var mockLogger = new Mock<ILogger<RoomService>>();
+      var service = new RoomService(mockTableClient.Object, mockLogger.Object);
 
       // Act
       var result = await service.GetFreeRoomAsync("1");

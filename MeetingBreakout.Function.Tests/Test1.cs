@@ -1,10 +1,8 @@
 ﻿namespace MeetingBreakout.Function.Tests;
 
 [TestClass]
-public sealed class Test1
-{
-    [TestMethod]
-    public void TestMethod1()
-    {
-    }
+public sealed class Test1 {
+  [TestMethod]
+  public void TestMethod1() {
+  }
 }
