@@ -34,8 +34,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -46,8 +50,7 @@
               "RelativeToolTip": "RoomService.Tests\\RoomServiceTests.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAApwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-06T00:46:43.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-06T00:46:43.27Z"
             },
             {
               "$type": "Document",
@@ -57,7 +60,7 @@
               "RelativeDocumentMoniker": "RoomService\\RoomService.cs",
               "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\RoomService.cs",
               "RelativeToolTip": "RoomService\\RoomService.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAIwK4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAIwKUAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-05T23:13:51.339Z",
               "EditorCaption": ""
@@ -72,8 +75,7 @@
               "RelativeToolTip": "MeetingBreakout.WebApp\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-05T23:17:04.984Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T23:17:04.984Z"
             },
             {
               "$type": "Document",
@@ -85,25 +87,19 @@
               "RelativeToolTip": "MeetingBreakout.WebApp\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-05T23:16:55.32Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T23:16:55.32Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RoomService",
+              "Title": "RoomService.csproj",
               "DocumentMoniker": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\RoomService.csproj",
               "RelativeDocumentMoniker": "RoomService\\RoomService.csproj",
               "ToolTip": "C:\\Projects\\MeetingBreakoutAgent\\RoomService\\RoomService.csproj",
               "RelativeToolTip": "RoomService\\RoomService.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-05T23:13:34.348Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2026-02-05T23:13:34.348Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "scripts\\CreateIcons.ps1",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-05T21:49:00.189Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T21:49:00.189Z"
             }
           ]
         }
