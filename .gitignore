@@ -25,6 +25,7 @@ bld/
 
 # Visual Studio cache/options directory
 .vs/
+/.vs
 
 # .NET Core
 project.lock.json
@@ -55,4 +56,4 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-/.vs
+
