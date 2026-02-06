@@ -149,9 +149,13 @@ public class RoomService: IRoomService {
     if (_tableClient == null) {
       return;
     }
+
+    string step = "Ensure Table Exists";
+
     try {
       await EnsureTableExistsAsync();
 
+      step = "Insert Initial Rooms";
       string[] options = ["1", "2", "3"];
       foreach (var option in options) {
         for (int i = 1; i <= 10; i++) {
@@ -170,7 +174,7 @@ public class RoomService: IRoomService {
       }
       _logger.LogInformation("Rooms initialized successfully.");
     } catch (Exception ex) {
-      _logger.LogError(ex.Source/*, "Error initializing rooms."*/);
+      _logger.LogError(ex, "Error initializing rooms. Step \"{step}\"", step);
       throw;
     }
   }
