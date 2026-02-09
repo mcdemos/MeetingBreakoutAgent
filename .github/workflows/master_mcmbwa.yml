@@ -51,9 +51,12 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E881D5EDCE254A73B0F2F3DFEBB4EE9D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B1787279260946308C2377C036F4E4CD }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_053A338055F04DFD97E02112B15BFEC2 }}
+#          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E881D5EDCE254A73B0F2F3DFEBB4EE9D }}
+#          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B1787279260946308C2377C036F4E4CD }}
+#          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_053A338055F04DFD97E02112B15BFEC2 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -62,4 +65,5 @@ jobs:
           app-name: 'mcmbwa'
           slot-name: 'Production'
           package: .
+
           
