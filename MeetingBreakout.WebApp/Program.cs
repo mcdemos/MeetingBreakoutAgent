@@ -25,6 +25,7 @@ builder.Services.AddCloudAdapter();
 
 // Register the agent
 builder.Services.AddTransient<IAgent, BreakoutAgent>();
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 

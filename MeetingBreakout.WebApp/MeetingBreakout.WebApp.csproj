@@ -11,8 +11,8 @@
     <PackageReference Include="Microsoft.Agents.Connector" Version="1.4.60-beta" />
     <PackageReference Include="Microsoft.Agents.Extensions.Teams" Version="1.4.60-beta" />
     <PackageReference Include="Microsoft.Agents.Hosting.AspNetCore" Version="1.4.60-beta" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.23" />
-    <PackageReference Include="Microsoft.Graph" Version="5.101.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Graph" Version="5.102.0" />
   </ItemGroup>
 
   <ItemGroup>

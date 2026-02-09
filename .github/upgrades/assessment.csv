@@ -1,0 +1,2 @@
+Issue ID,Description,State,Severity,Story Points,Project Path,Location Kind,Path,Line,Column,Incident ID,Help Link,Assembly Name,Assembly Version,Assembly Public Key,Snippet
+AzureFunctionsUpgrade.0002,Enable the use of the V2 model for Azure Functions projects and enable Application Insights.,Active,Mandatory,3,MeetingBreakout.Function\MeetingBreakout.Function.csproj,File,MeetingBreakout.Function\MeetingBreakout.Function.csproj,,,,,,,,
