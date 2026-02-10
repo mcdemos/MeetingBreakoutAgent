@@ -37,7 +37,9 @@ public class RoomService: IRoomService {
     _logger = logger;
     // Assuming connection string for simplicity, or use Managed Identity uri
     var storageAccountName = configuration["Storage:AccountName"];
+    _logger.LogInformation($"Storage:AccountName: {storageAccountName}");
     var tableName = configuration["Storage:TableName"] ?? "BreakoutRooms";
+    _logger.LogInformation($"Storage:TableName: {tableName}");
     var accountUrl = $"https://{storageAccountName}.table.core.windows.net";
 
     if (!string.IsNullOrEmpty(storageAccountName)) {
@@ -46,6 +48,7 @@ public class RoomService: IRoomService {
     } else {
       // Fallback for local dev if connection string provided
       var connectionString = configuration["Storage:ConnectionString"];
+      _logger.LogInformation($"Storage:ConnectionString: {connectionString}");
       if (!string.IsNullOrEmpty(connectionString)) {
         _tableClient = new TableClient(connectionString, tableName);
       }
