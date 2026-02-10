@@ -18,13 +18,18 @@ namespace MeetingBreakout.WebApp.Services {
       var tenantId = configuration["AzureAd:TenantId"];
       var clientId = configuration["AzureAd:ClientId"];
       var clientSecret = configuration["AzureAd:ClientSecret"];
+      var managedIdentityClientId = configuration["AzureAd:ManagedIdentityClientId"];
 
       _siteId = configuration["SharePoint:SiteId"];
       _listId = configuration["SharePoint:ListId"];
 
-      if (!string.IsNullOrEmpty(tenantId) && !string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret)) {
+      if (!string.IsNullOrEmpty(managedIdentityClientId)) {
+        var managedIdentityCredential = new ManagedIdentityCredential(managedIdentityClientId);
+        _graphClient = new GraphServiceClient(managedIdentityCredential);
+      }
+      else if (!string.IsNullOrEmpty(tenantId) && !string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret)) {
         var options = new ClientSecretCredentialOptions {
-          AuthorityHost = AzureAuthorityHosts.AzurePublicCloud,
+          AuthorityHost = AzureAuthorityHosts.AzurePublicCloud
         };
 
         var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret, options);

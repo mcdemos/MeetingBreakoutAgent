@@ -21,7 +21,7 @@ namespace MeetingBreakout.Function {
     }
 
     [Function("CleanupTimer")]
-    public async Task RunTimer([TimerTrigger("0 0 1 * * *")] TimerInfo myTimer) {
+    public async Task RunTimer([TimerTrigger("0 0 2 * * *")] TimerInfo myTimer) {
       _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
       await _roomService.InitializeRoomsAsync();
     }
