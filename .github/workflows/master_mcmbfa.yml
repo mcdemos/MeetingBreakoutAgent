@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'MeetingBreakout.Function' # set this to the path to your web app project, defaults to the repository root
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '8.0.x' # set this to the dotnet version to use
 
 jobs:
@@ -39,12 +39,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-#          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FFF629DA5DE14662A7BA4FBA8C151994 }}
-#          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0A60F15CBAC847FBAE7CDC7B8CF847F9 }}
-#          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_ED88C4D6EEE24384863D3131CD7B1173 }}
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8A007A4BA1F2476AA023F71A75C38BEB }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9923D520313A4DEB854CC4E8D1499E79 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F7A80DDFA0164D468D74321C9CD6B908 }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
@@ -53,7 +50,4 @@ jobs:
           app-name: 'mcmbfa'
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-
           
-
-
