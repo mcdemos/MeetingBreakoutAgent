@@ -44,6 +44,7 @@ public class RoomService: IRoomService {
 
     if (!string.IsNullOrEmpty(storageAccountName)) {
       var credential = new DefaultAzureCredential();
+      _logger.LogInformation($"Credential: {credential.ToString()}");
       _tableClient = new TableClient(new Uri(accountUrl), tableName, credential);
     } else {
       // Fallback for local dev if connection string provided
